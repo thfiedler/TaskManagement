@@ -7,7 +7,7 @@
 *&---------------------------------------------------------------------*
 report ztask_display.
 
-parameters name type ztask_responsible.
+"parameters name type ztask_responsible.
 
 types: begin of ty_task_4_display,
           creation_date type datum,
@@ -18,7 +18,7 @@ types: begin of ty_task_4_display,
 data it_tasks type standard table of ty_task_4_display.
 data alv type ref to cl_salv_table.
 
-select description creation_date creation_time from ztasks into corresponding fields of table it_tasks where responsible = name.
+select description creation_date creation_time from ztasks into corresponding fields of table it_tasks where responsible = sy-uname.
 
 cl_salv_table=>factory(
   importing

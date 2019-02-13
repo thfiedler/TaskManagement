@@ -8,6 +8,7 @@
     <VARCL>X</VARCL>
     <DBAPL>S</DBAPL>
     <SUBC>1</SUBC>
+    <RLOAD>E</RLOAD>
     <FIXPT>X</FIXPT>
     <LDBNAME>D$S</LDBNAME>
     <UCCHECK>X</UCCHECK>
@@ -15,8 +16,8 @@
    <TPOOL>
     <item>
      <ID>R</ID>
-     <ENTRY>.</ENTRY>
-     <LENGTH>1</LENGTH>
+     <ENTRY>Create a new Task</ENTRY>
+     <LENGTH>17</LENGTH>
     </item>
    </TPOOL>
    <I18N_TPOOL>
@@ -35,7 +36,7 @@
      <TEXTPOOL>
       <item>
        <ID>R</ID>
-       <ENTRY>[.∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]</ENTRY>
+       <ENTRY>[Ĉŗēąţē∙ą∙ŋēŵ∙Ţąşķ∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙∙]</ENTRY>
        <LENGTH>70</LENGTH>
       </item>
      </TEXTPOOL>
