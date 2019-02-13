@@ -62,4 +62,8 @@ class zcl_task implementation.
     macro1.
   ENDMETHOD.
 
+  METHOD zif_task~is_persistent.
+    is_persistent = 'X'.
+  ENDMETHOD.
+
 endclass.
