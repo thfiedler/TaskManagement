@@ -1,4 +1,4 @@
-class zcl_task definition
+class ZCL_TASK definition
   public
   final
   create public .
@@ -22,26 +22,15 @@ class zcl_task definition
   private section.
     data task_data type ztask_struc.
     data is_persistent type boole_d.
+    data task_data_persist type ztasks.
 
 endclass.
 
 
 
-class zcl_task implementation.
+class ZCL_TASK implementation.
 
   method constructor.
-*    data(uuid_generator)  = cl_uuid_factory=>create_system_uuid( ).
-*    try.
-*        task_data-uuid = uuid_generator->create_uuid_c32( ).
-*        task_data-description = description.
-*        task_data-creation_date = cl_abap_context_info=>get_system_date( ).
-*        task_data-creation_time = cl_abap_context_info=>get_system_time( ).
-*        task_data-responsible = cl_abap_context_info=>get_user_formatted_name( ).
-*      catch cx_uuid_error cx_abap_context_info_error.
-*        raise exception type zcx_task_creation_error.
-*    endtry.
-*    task_data-uuid = uuid_generator->create_uuid_c32( ).
-
     call function 'SYSTEM_GET_UNIQUE_ID'
       importing
         unique_id = task_data-uuid.
@@ -52,7 +41,7 @@ class zcl_task implementation.
   endmethod.
 
   method zif_task~get_description.
-
+    move me->task_data-description to description.
   endmethod.
 
   method zif_task~get_id.
@@ -60,12 +49,12 @@ class zcl_task implementation.
   endmethod.
 
   method zif_task~get_responsible.
-    responsible = me->task_data-responsible.
+    move me->task_data-responsible to responsible.
   endmethod.
 
 
   method create_new_task.
-    task = new zcl_task( description = description ).
+    task = new ZCL_TASK( description = description ).
   endmethod.
 
   method zif_task~is_persistent.
@@ -73,10 +62,10 @@ class zcl_task implementation.
   endmethod.
 
   method save.
-    data task_data_persist type ztasks.
     move-corresponding me->task_data to task_data_persist.
     insert ztasks from @task_data_persist.
     me->is_persistent = 'X'.
+    free task_data_persist.
   endmethod.
 
 endclass.

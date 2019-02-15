@@ -11,6 +11,7 @@
    <FUNCTIONS>
     <item>
      <FUNCNAME>ZCREATE_TASK_API</FUNCNAME>
+     <REMOTE_CALL>R</REMOTE_CALL>
      <SHORT_TEXT>.</SHORT_TEXT>
     </item>
    </FUNCTIONS>

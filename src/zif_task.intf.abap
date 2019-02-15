@@ -3,7 +3,8 @@ interface zif_task
   methods get_id
     returning
       value(id) type ztask_struc-uuid.
-  methods get_description.
+  methods get_description
+    returning value(description) type char255.
   methods get_responsible
     returning
       value(responsible) type ztask_struc-responsible.
