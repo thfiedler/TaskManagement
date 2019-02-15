@@ -13,27 +13,6 @@
      <FUNCNAME>ZCREATE_TASK_API</FUNCNAME>
      <SHORT_TEXT>.</SHORT_TEXT>
     </item>
-    <item>
-     <FUNCNAME>ZREAD_MATERIALS</FUNCNAME>
-     <SHORT_TEXT>.</SHORT_TEXT>
-     <IMPORT>
-      <RSIMP>
-       <PARAMETER>P_MATNR</PARAMETER>
-       <TYP>MATNR</TYP>
-      </RSIMP>
-     </IMPORT>
-     <DOCUMENTATION>
-      <RSFDO>
-       <PARAMETER>P_MATNR</PARAMETER>
-       <KIND>P</KIND>
-       <INDEX> 001</INDEX>
-      </RSFDO>
-     </DOCUMENTATION>
-    </item>
-    <item>
-     <FUNCNAME>ZTASK_CREATE_UI_POPUP</FUNCNAME>
-     <SHORT_TEXT>.</SHORT_TEXT>
-    </item>
    </FUNCTIONS>
    <DYNPROS>
     <item>

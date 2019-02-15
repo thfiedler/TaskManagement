@@ -3,67 +3,80 @@ class zcl_task definition
   final
   create public .
 
-public section.
- interfaces zif_task.
- class-methods create_new_task
-   importing
-     description type ztask_description
-   returning
-     value(r_result) type ref to zif_task
-   raising
-     zcx_task_creation_error.
-protected section.
-private section.
-  data uuid type ztasks-uuid.
-  data description type char100.
-  methods dummy.
+  public section.
+    interfaces zif_task.
+    class-methods create_new_task
+      importing
+        description type ztask_description
+      returning
+        value(task) type ref to zif_task
+      raising
+        zcx_task_creation_error.
+    methods constructor
+      importing
+        description type any optional
+      raising
+        zcx_task_creation_error.
+    methods save.
+  protected section.
+  private section.
+    data task_data type ztask_struc.
+    data is_persistent type boole_d.
+
 endclass.
 
 
 
 class zcl_task implementation.
-  method zif_task~get_description.
-    data desc type char100.
-    if sy-mandt = 001.
 
-    endif.
+  method constructor.
+*    data(uuid_generator)  = cl_uuid_factory=>create_system_uuid( ).
+*    try.
+*        task_data-uuid = uuid_generator->create_uuid_c32( ).
+*        task_data-description = description.
+*        task_data-creation_date = cl_abap_context_info=>get_system_date( ).
+*        task_data-creation_time = cl_abap_context_info=>get_system_time( ).
+*        task_data-responsible = cl_abap_context_info=>get_user_formatted_name( ).
+*      catch cx_uuid_error cx_abap_context_info_error.
+*        raise exception type zcx_task_creation_error.
+*    endtry.
+*    task_data-uuid = uuid_generator->create_uuid_c32( ).
+
+    call function 'SYSTEM_GET_UNIQUE_ID'
+      importing
+        unique_id = task_data-uuid.
+    task_data-description = description.
+    task_data-creation_date = sy-datum.
+    task_data-creation_time = sy-uzeit.
+    task_data-responsible = sy-uname.
+  endmethod.
+
+  method zif_task~get_description.
+
   endmethod.
 
   method zif_task~get_id.
-    data(uuid) = me->uuid.
+    id = me->task_data-uuid.
   endmethod.
 
   method zif_task~get_responsible.
-     data resp type syst-uname.
-     resp = sy-uname.
-     move resp to me->description.
+    responsible = me->task_data-responsible.
   endmethod.
 
 
   method create_new_task.
-    data task type ztasks.
-    data(uuid_generator)  = cl_uuid_factory=>create_system_uuid( ).
-    try.
-        task-uuid = uuid_generator->create_uuid_c32( ).
-      catch cx_uuid_error.
-        raise exception type zcx_task_creation_error.
-    endtry.
-    task-description = description.
-    task-creation_date = sy-datum.
-    task-creation_time = sy-uzeit.
-    task-responsible = sy-uname.
-
-    insert ztasks from @task.
+    task = new zcl_task( description = description ).
   endmethod.
 
-  METHOD dummy.
-    data a type int4.
-    data b type int4.
-    macro1.
-  ENDMETHOD.
+  method zif_task~is_persistent.
+    is_persistent = me->is_persistent.
+  endmethod.
 
-  METHOD zif_task~is_persistent.
-    is_persistent = 'X'.
-  ENDMETHOD.
+  method save.
+    data task_data_persist type ztasks.
+    move-corresponding me->task_data to task_data_persist.
+    insert ztasks from @task_data_persist.
+    me->is_persistent = 'X'.
+  endmethod.
 
 endclass.
