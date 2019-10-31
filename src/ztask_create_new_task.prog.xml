@@ -4,8 +4,6 @@
   <asx:values>
    <PROGDIR>
     <NAME>ZTASK_CREATE_NEW_TASK</NAME>
-    <STATE>A</STATE>
-    <VARCL>X</VARCL>
     <DBAPL>S</DBAPL>
     <SUBC>1</SUBC>
     <RLOAD>E</RLOAD>

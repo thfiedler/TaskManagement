@@ -1,6 +1,6 @@
 class ZCL_TASK definition
   public
-  final
+
   create public .
 
   public section.
@@ -31,9 +31,9 @@ endclass.
 class ZCL_TASK implementation.
 
   method constructor.
-    call function 'SYSTEM_GET_UNIQUE_ID'
-      importing
-        unique_id = task_data-uuid.
+
+    task_data-uuid = cl_system_uuid=>create_uuid_x16_static( ).
+
     task_data-description = description.
     task_data-creation_date = sy-datum.
     task_data-creation_time = sy-uzeit.
